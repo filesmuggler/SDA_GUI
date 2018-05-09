@@ -31,6 +31,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -47,29 +48,28 @@ public class SDA_GUI extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("SDA_GUI (beta)");
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
+        grid.setAlignment(Pos.TOP_LEFT);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-
-        //Text scenetitle = new Text("Welcome");
-        //scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        //grid.add(scenetitle, 0, 0, 2, 1);
-
-        //display checkboxes to select if divide or merge
-        //generate proper textfields and labels
         
         CheckBox if_divide = new CheckBox("Divide");
-        grid.add(if_divide,0,1);
+       
         CheckBox if_merge = new CheckBox("Merge");
-        grid.add(if_merge,1,1);
-        CheckBox if_encrypt = new CheckBox("Encrypt");
-        grid.add(if_encrypt,0,2);
-        CheckBox if_decrypt = new CheckBox("Decrypt");
-        grid.add(if_decrypt,1,2);
-        //CheckBox if_plain = new CheckBox("No encryption");
-        //grid.add(if_plain,1,3);
         
+        CheckBox if_encrypt = new CheckBox("Encrypt");
+        
+        CheckBox if_decrypt = new CheckBox("Decrypt");
+        
+        HBox OperationButtons = new HBox(5);
+        OperationButtons.setSpacing(10);
+        OperationButtons.getChildren().addAll(if_divide, if_merge);
+        grid.add(OperationButtons, 0, 1);
+        
+        HBox EncryptionButtons = new HBox(5);
+        EncryptionButtons.setSpacing(10);
+        EncryptionButtons.getChildren().addAll(if_encrypt, if_decrypt);
+        grid.add(EncryptionButtons, 0, 2);
         
         //Label userName = new Label("User Name:");
         //grid.add(userName, 0, 1);
@@ -83,14 +83,14 @@ public class SDA_GUI extends Application {
         //PasswordField pwBox = new PasswordField();
         //grid.add(pwBox, 1, 2);
 
-        Button btn = new Button("Sign in");
+        Button btn = new Button("Next");
         HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 4);
+        grid.add(hbBtn, 0, 3);
 
         final Text actiontarget = new Text();
-        grid.add(actiontarget, 1, 6);
+        grid.add(actiontarget, 0, 4);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -121,7 +121,6 @@ public class SDA_GUI extends Application {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	if_decrypt.setSelected(false);
-            	//if_plain.setSelected(!newValue);
             	if_merge.setSelected(false);
             }
         });
@@ -130,19 +129,10 @@ public class SDA_GUI extends Application {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	if_encrypt.setSelected(false);
-            	//if_plain.setSelected(!newValue);
             	if_divide.setSelected(false);
             }
         });
-        /*
-        if_plain.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-            	if_encrypt.setSelected(false);
-            	if_decrypt.setSelected(false);
-            	//if_divide.setSelected(!newValue);
-            }
-        });*/
+       
         
         
 
