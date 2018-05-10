@@ -40,13 +40,16 @@ import javafx.stage.Stage;
 
 public class SDA_GUI extends Application {
     
-	private boolean if_success;
+	private boolean if_div;
+	private boolean if_mer;
+	private boolean if_enc;
+	private boolean if_dec;
 	
 	
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     @Override
     public void start(Stage primaryStage) {
     	
@@ -152,8 +155,21 @@ public class SDA_GUI extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Output of the operation");
+            	 if(if_div) {
+            		 actiontarget.setFill(Color.GREEN);
+                     actiontarget.setText("Dividing");
+            	 }
+            	 else if(if_mer) {
+            		 actiontarget.setFill(Color.GREEN);
+                     actiontarget.setText("Merging");
+            	 }
+            	 else {
+            		 actiontarget.setFill(Color.FIREBRICK);
+                     actiontarget.setText("Output of the operation");
+            	 }
+            	
+            	
+                
             }
         });
         
@@ -170,6 +186,15 @@ public class SDA_GUI extends Application {
             	DivideLabels.setVisible(true);
             	MergeLabels.setVisible(false);
             	DivideFields.setVisible(true);
+            	if(newValue) {
+            		if_div = true;
+                	if_mer = false;
+            	}
+            	else {
+            		if_div = false;
+                	if_mer = false;
+            	}
+            	
             }
         });
 
@@ -185,6 +210,14 @@ public class SDA_GUI extends Application {
             	DivideLabels.setVisible(false);
             	MergeLabels.setVisible(true);
             	DivideFields.setVisible(false);
+            	if(newValue) {
+            		if_div = false;
+                	if_mer = true;
+            	}
+            	else {
+            		if_div = false;
+                	if_mer = false;
+            	}
             }
         });
         
@@ -196,6 +229,14 @@ public class SDA_GUI extends Application {
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	if_decrypt.setSelected(false);
             	if_merge.setSelected(false);
+            	if(newValue) {
+            		if_enc = true;
+                	if_dec = false;
+            	}
+            	else {
+            		if_enc = false;
+                	if_dec = false;
+            	}
             }
         });
 
@@ -207,12 +248,23 @@ public class SDA_GUI extends Application {
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	if_encrypt.setSelected(false);
             	if_divide.setSelected(false);
+            	if(newValue) {
+            		if_enc = false;
+                	if_dec = true;
+            	}
+            	else {
+            		if_enc = false;
+                	if_dec = false;
+            	}
             }
         });
        
         Scene scene = new Scene(grid, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        
+       
     }
     
 }
