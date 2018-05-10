@@ -49,88 +49,107 @@ public class SDA_GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("SDA_GUI (beta)");
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
+    	
+        primaryStage.setTitle("SDA_GUI (beta)");							//setting title of the window
+        GridPane grid = new GridPane();										//creating primary grid
+        grid.setAlignment(Pos.CENTER);										//centering all contents		
+        grid.setHgap(10);			
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         
+        /*
+         * CheckBoxes are used to select the mode of operation
+         */
         CheckBox if_divide = new CheckBox("Divide");
-       
-        CheckBox if_merge = new CheckBox("Merge");
-        
-        CheckBox if_encrypt = new CheckBox("Encrypt");
-        
+        CheckBox if_merge = new CheckBox("Merge");        
+        CheckBox if_encrypt = new CheckBox("Encrypt");        
         CheckBox if_decrypt = new CheckBox("Decrypt");
         
+        /*
+         * Organizing CheckBoxes for divide and merge
+         */
         HBox OperationButtons = new HBox(5);
         OperationButtons.setSpacing(50);
         OperationButtons.getChildren().addAll(if_divide, if_merge);
         grid.add(OperationButtons, 0, 1);
         
+        /*
+         * Organizing CheckBoxes for encrypt and decrypt
+         */
         HBox EncryptionButtons = new HBox(5);
         EncryptionButtons.setSpacing(50);
         EncryptionButtons.getChildren().addAll(if_encrypt, if_decrypt);
         grid.add(EncryptionButtons, 0, 2);
         
-        
+        /*
+         * Labels and textfields for dividing mode of operation
+         */        
         Label d_inputfile = new Label("Input File:");        
         Label d_outputfile_1 = new Label("Output File 1:");        
         Label d_outputfile_2 = new Label("Output File 2:");
-        
         TextField d_inputfile_f = new TextField();
         TextField d_outputfile_1_f = new TextField();
         TextField d_outputfile_2_f = new TextField();
 
+        /*
+         * Labels and textfields for merging mode of operation
+         */
         Label m_inputfile_1 = new Label("Input File 1:");        
         Label m_inputfile_2 = new Label("Input File 2:");
-        Label m_outputfile = new Label("Output File:");
-        
+        Label m_outputfile = new Label("Output File:");        
         TextField m_inputfile_1_f = new TextField();
         TextField m_inputfile_2_f = new TextField();
         TextField m_outputfile_f = new TextField();
         
-        
-        //TODO define the children on DivideFields
+        /*
+         * Organizing labels and textfields for dividing mode of operation
+         */
         VBox DivideLabels = new VBox();
         DivideLabels.setSpacing(10);
         DivideLabels.getChildren().addAll(d_inputfile, d_outputfile_1, d_outputfile_2);
         grid.add(DivideLabels, 0, 3);
         DivideLabels.setVisible(false);
         
-        //TODO define the children on MergeFields
-        VBox MergeLabels = new VBox();
-        MergeLabels.setSpacing(10);
-        MergeLabels.getChildren().addAll(m_inputfile_1,m_inputfile_2,m_outputfile);
-        grid.add(MergeLabels, 0, 3);
-        MergeLabels.setVisible(false);
-        
-        //TODO define the children on DivideFields
         VBox DivideFields = new VBox();
         DivideFields.setSpacing(10);
         DivideFields.getChildren().addAll(d_inputfile_f, d_outputfile_1_f, d_outputfile_2_f);
         grid.add(DivideFields, 1, 3);
         DivideFields.setVisible(false);
         
-        //TODO define the children on MergeFields
+        /*
+         * Organizing labels and textfields for merging mode of operation
+         */
+        VBox MergeLabels = new VBox();
+        MergeLabels.setSpacing(10);
+        MergeLabels.getChildren().addAll(m_inputfile_1,m_inputfile_2,m_outputfile);
+        grid.add(MergeLabels, 0, 3);
+        MergeLabels.setVisible(false);
+                
         VBox MergeFields = new VBox();
         MergeFields.setSpacing(10);
         MergeFields.getChildren().addAll(m_inputfile_1_f,m_inputfile_2_f,m_outputfile_f);
         grid.add(MergeFields, 1, 3);
         MergeFields.setVisible(false);
         
+        /*
+         * Buton that fires up the chosen operation
+         */
         Button btn = new Button("Execute");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_LEFT);
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 6);
 
+        /*
+         * Creating feedback text after operation is completed
+         */
         final Text actiontarget = new Text();
         grid.add(actiontarget, 0, 6);
 
+        /*
+         * Setting the event handler for the button, when pressed 
+         */
         btn.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
@@ -138,6 +157,10 @@ public class SDA_GUI extends Application {
             }
         });
         
+        
+        /*
+         * if_divide.selectedProperty() is used to define contents to be displayed after clicking the "Divide" checkbox
+         */
         if_divide.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -150,6 +173,9 @@ public class SDA_GUI extends Application {
             }
         });
 
+        /*
+         * if_merge.selectedProperty() is used to define contents to be displayed after clicking the "Merge" checkbox
+         */
         if_merge.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -162,6 +188,9 @@ public class SDA_GUI extends Application {
             }
         });
         
+        /*
+         * if_encrypt.selectedProperty() is used to define contents to be displayed after clicking the "Encrypt" checkbox
+         */
         if_encrypt.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -170,6 +199,9 @@ public class SDA_GUI extends Application {
             }
         });
 
+        /*
+         * if_decrypt.selectedProperty() is used to define contents to be displayed after clicking the "Decrypt" checkbox
+         */
         if_decrypt.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -178,9 +210,6 @@ public class SDA_GUI extends Application {
             }
         });
        
-        
-        
-
         Scene scene = new Scene(grid, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
