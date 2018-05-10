@@ -16,6 +16,8 @@ limitations under the License.
 ************************************************************************
 */
 
+
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -158,6 +161,10 @@ public class SDA_GUI extends Application {
             	 if(if_div) {
             		 actiontarget.setFill(Color.GREEN);
                      actiontarget.setText("Dividing");
+                     System.out.println(d_inputfile_f.getText());
+                     System.out.println(d_outputfile_1_f.getText());
+                     System.out.println(d_outputfile_2_f.getText());
+                     
             	 }
             	 else if(if_mer) {
             		 actiontarget.setFill(Color.GREEN);
