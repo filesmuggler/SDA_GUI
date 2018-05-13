@@ -86,7 +86,6 @@ public class FileMerger {
         int counter_1 = 0;
         int counter_2 = 0;
         
-        System.out.println("1");
         for(int i=0; i < (file_len_1 + file_len_2); i++){
             if(i%2 == 0){
                 out_file[i] = input_file_1[counter_1];
