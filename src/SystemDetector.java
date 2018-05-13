@@ -18,4 +18,28 @@ limitations under the License.
 
 public class SystemDetector {
 
+	private static String what_OS = null;
+	
+	public static String getOsName() {
+		if(what_OS == null) { 
+            what_OS = System.getProperty("os.name"); 
+        }
+        return what_OS;
+	}
+	
+	//checks if OS is MS windows
+	public static boolean isWindows(){
+        return getOsName().startsWith("Windows");
+    }
+	
+	//checks if OS is Unix
+	public static boolean isUnix(){
+        return getOsName().startsWith("Unix");
+    }
+	
+	//checks if OS is Mac OS
+	public static boolean isMacOS(){
+        return getOsName().startsWith("mac");
+    }
+	
 }

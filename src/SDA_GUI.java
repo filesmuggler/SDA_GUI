@@ -18,6 +18,8 @@ limitations under the License.
 
 
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -142,7 +144,7 @@ public class SDA_GUI extends Application {
          */
         Button btn = new Button("Execute");
         HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 6);
 
@@ -161,18 +163,46 @@ public class SDA_GUI extends Application {
             	 if(if_div) {
             		 actiontarget.setFill(Color.GREEN);
                      actiontarget.setText("Dividing");
-                     System.out.println(d_inputfile_f.getText());
-                     System.out.println(d_outputfile_1_f.getText());
-                     System.out.println(d_outputfile_2_f.getText());
+                     
+                     FileDivider divider = new FileDivider();
+                     divider.chooseFile(d_inputfile_f.getText());
+                     
+                     try {
+                         divider.divideFile(d_outputfile_1_f.getText(), d_outputfile_2_f.getText());
+                         actiontarget.setFill(Color.BLUE);
+                         actiontarget.setText("Divided");
+                     }
+                     catch(IOException ex) {
+                         ex.printStackTrace();
+                         actiontarget.setFill(Color.RED);
+                         actiontarget.setText("IOException error");
+                     }
+                     
                      
             	 }
             	 else if(if_mer) {
             		 actiontarget.setFill(Color.GREEN);
                      actiontarget.setText("Merging");
+                     System.out.println(m_inputfile_1_f.getText());
+                     System.out.println(m_inputfile_2_f.getText());
+                     System.out.println(m_outputfile_f.getText());
+                     
+                     FileMerger merger = new FileMerger();
+                 	 merger.chooseFiles(m_inputfile_1_f.getText(),m_inputfile_2_f.getText());
+                 	 try {
+                 	    merger.mergeFiles(m_outputfile_f.getText());
+                 	   actiontarget.setFill(Color.BLUE);
+                       actiontarget.setText("Merged");
+                 	 }
+                 	 catch(IOException ex) {
+                 	    ex.printStackTrace();
+                 	   actiontarget.setFill(Color.RED);
+                       actiontarget.setText("IOException error");
+                 	 }
             	 }
             	 else {
             		 actiontarget.setFill(Color.FIREBRICK);
-                     actiontarget.setText("Output of the operation");
+                     actiontarget.setText("Choose any mode of operation");
             	 }
             	
             	
